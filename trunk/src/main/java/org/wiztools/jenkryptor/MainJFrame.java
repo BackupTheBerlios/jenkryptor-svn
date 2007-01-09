@@ -83,6 +83,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jmtExit = new javax.swing.JMenuItem();
         jmPreferences = new javax.swing.JMenu();
         jmHelp = new javax.swing.JMenu();
+        jmtAbout = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jdFileChooserLayout = new javax.swing.GroupLayout(jdFileChooser.getContentPane());
         jdFileChooser.getContentPane().setLayout(jdFileChooserLayout);
@@ -242,6 +243,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jmtExit.setMnemonic('x');
         jmtExit.setText("Exit");
+        jmtExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmtExitActionPerformed(evt);
+            }
+        });
+
         jmFile.add(jmtExit);
 
         jMenuBar2.add(jmFile);
@@ -258,6 +265,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jmHelp.setMnemonic('h');
         jmHelp.setText("Help");
+        jmtAbout.setMnemonic('a');
+        jmtAbout.setText("About");
+        jmHelp.add(jmtAbout);
+
         jMenuBar2.add(jmHelp);
 
         setJMenuBar(jMenuBar2);
@@ -270,12 +281,14 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmtExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmtExitActionPerformed
 
     private void jmPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPreferencesActionPerformed
 // TODO add your handling code here:
@@ -389,6 +402,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
     private javax.swing.JMenu jmPreferences;
+    private javax.swing.JMenuItem jmtAbout;
     private javax.swing.JMenuItem jmtExit;
     private javax.swing.JPanel jpScrollbar;
     private javax.swing.JPasswordField jpf1;
