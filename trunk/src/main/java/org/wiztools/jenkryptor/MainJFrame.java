@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,6 +27,10 @@ public class MainJFrame extends javax.swing.JFrame {
     /** Creates new form MainJFrame */
     public MainJFrame() {
         initComponents();
+        
+        setIconImage(new ImageIcon(
+                this.getClass().getClassLoader().getResource(
+                "org/wiztools/jenkryptor/logo.png")).getImage());
         
         this.setResizable(false);
         
