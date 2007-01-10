@@ -116,6 +116,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jtfFiles.setEditable(false);
 
+        jbFileOpen.setMnemonic('r');
         jbFileOpen.setText("Browse");
         jbFileOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

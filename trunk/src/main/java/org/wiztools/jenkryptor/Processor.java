@@ -71,7 +71,7 @@ public class Processor {
                         try{
                             InputStream is = new FileInputStream(file);
 
-                            String filePath = file.getCanonicalPath();
+                            String filePath = file.getAbsolutePath();
 
                             if(mode == MODE_ENCRYPT){
                                 OutputStream os = new FileOutputStream(filePath + ".wiz");
