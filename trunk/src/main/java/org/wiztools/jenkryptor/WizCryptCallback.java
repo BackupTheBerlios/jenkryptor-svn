@@ -11,6 +11,7 @@ package org.wiztools.jenkryptor;
 
 import java.io.File;
 import java.io.IOException;
+import org.wiztools.jenkryptor.util.StringUtil;
 import org.wiztools.wizcrypt.Callback;
 
 /**
@@ -32,7 +33,9 @@ public class WizCryptCallback implements Callback {
     public void begin() {
         originalLabel = lpe.getLabelText();
         try{
-            lpe.setLabel(file.getCanonicalPath());
+            String path = StringUtil.getCompactedPath(file.getCanonicalPath());
+            System.out.println("Path: "+path);
+            lpe.setLabel(path);
         }
         catch(IOException ioe){
             ioe.printStackTrace();
