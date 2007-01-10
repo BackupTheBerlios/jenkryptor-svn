@@ -30,6 +30,10 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private JFileChooser jfc = new JFileChooser();
     
+    private final Validator validator = new MixedFilesValidator().setNext(
+                new SameFileValidator().setNext(null)
+                );
+    
     /** Creates new form MainJFrame */
     public MainJFrame() {
         initComponents();
@@ -330,11 +334,8 @@ public class MainJFrame extends javax.swing.JFrame {
             return;
         }
         
-        Validator v = new MixedFilesValidator().setNext(
-                new SameFileValidator().setNext(null)
-                );
         try{
-            v.validate(files);
+            validator.validate(files);
         }
         catch(ValidatorException ve){
             JOptionPane.showMessageDialog(this, ve.getMessage(), "Validation Error!", JOptionPane.ERROR_MESSAGE);
