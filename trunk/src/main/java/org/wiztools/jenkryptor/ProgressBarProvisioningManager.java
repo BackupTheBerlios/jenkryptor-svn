@@ -25,7 +25,7 @@ public class ProgressBarProvisioningManager {
     /**
      * Creates a new instance of ProgressBarProvisioningManager
      */
-    public ProgressBarProvisioningManager(int number) {
+    public ProgressBarProvisioningManager(final int number) {
         this.number = number;
         
         lpe_arr = new LabelProgressbarEnsc[number];
@@ -43,7 +43,7 @@ public class ProgressBarProvisioningManager {
         return stack.pop();
     }
     
-    public synchronized void returnLPE(LabelProgressbarEnsc lpb){
+    public synchronized void returnLPE(final LabelProgressbarEnsc lpb){
         stack.push(lpb);
     }
     

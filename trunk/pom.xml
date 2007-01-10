@@ -33,7 +33,7 @@
                                 <manifest>
                                     <addClasspath>true</addClasspath>
                                     <classpathPrefix>lib</classpathPrefix>
-                                    <mainClass>org.wiztools.jenkryptor.MainJFrame</mainClass>
+                                    <mainClass>org.wiztools.jenkryptor.Main</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
@@ -69,6 +69,11 @@
             <groupId>org.wiztools</groupId>
             <artifactId>wizcrypt</artifactId>
             <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>picocontainer</groupId>
+            <artifactId>picocontainer</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 </project>
