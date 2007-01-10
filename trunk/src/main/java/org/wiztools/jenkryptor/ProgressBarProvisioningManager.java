@@ -31,7 +31,6 @@ public class ProgressBarProvisioningManager {
         lpe_arr = new LabelProgressbarEnsc[number];
         
         for(int i = number-1; i >= 0; i--){
-            System.out.println("i: "+i);
             lpe_arr[i] = new LabelProgressbarEnsc("Thread: "+(i+1));
             stack.push(lpe_arr[i]);
         }
@@ -39,7 +38,6 @@ public class ProgressBarProvisioningManager {
     }
     
     public synchronized LabelProgressbarEnsc getLPE(){
-        System.out.println("Popping: "+stack.size());
         return stack.pop();
     }
     

@@ -9,6 +9,7 @@
 
 package org.wiztools.jenkryptor;
 
+import java.awt.Font;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -26,6 +27,8 @@ public class LabelProgressbarEnsc {
     /** Creates a new instance of LabelProgressbarEnsc */
     public LabelProgressbarEnsc(String label) {
         jl = new JLabel(label);
+        String fontFamily = jl.getFont().getFamily();
+        jl.setFont(new Font(fontFamily, Font.PLAIN, 10));
         jpb = new JProgressBar();
     }
     

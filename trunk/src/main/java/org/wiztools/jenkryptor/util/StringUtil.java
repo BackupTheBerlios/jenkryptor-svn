@@ -22,6 +22,7 @@ public class StringUtil {
     }
     
     private static final int PATH_SIZE = 40;
+    private static final String CONNECT_STR = "[...]";
     
     public static String getCompactedPath(String path){
         if(path.length() > PATH_SIZE){
@@ -42,7 +43,13 @@ public class StringUtil {
             String str1 = path.substring(0, idx_start);
             String str2 = path.substring(idx_end);
             
-            return str1 + "[...]" + str2;
+            String retStr = str1 + CONNECT_STR + str2;
+            
+            if(retStr.length() > PATH_SIZE){
+                retStr = CONNECT_STR + str2;
+            }
+            
+            return retStr;
         }
         return path;
     }
