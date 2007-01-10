@@ -9,6 +9,7 @@
 
 package org.wiztools.jenkryptor;
 
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
@@ -29,11 +30,19 @@ public class LabelProgressbarEnsc {
     }
     
     public void setLabel(final String label){
-        SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-                jl.setText(label);
-            }
-        });
+        try{
+            SwingUtilities.invokeAndWait(new Runnable(){
+                public void run(){
+                    jl.setText(label);
+                }
+            });
+        }
+        catch(InvocationTargetException ite){
+            ite.printStackTrace();
+        }
+        catch(InterruptedException ie){
+            ie.printStackTrace();
+        }
     }
     
     public String getLabelText(){
