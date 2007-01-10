@@ -65,8 +65,6 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jdFileChooser = new javax.swing.JDialog();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jlStatus = new javax.swing.JLabel();
@@ -89,21 +87,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jmPreferences = new javax.swing.JMenu();
         jmHelp = new javax.swing.JMenu();
         jmtAbout = new javax.swing.JMenuItem();
-
-        javax.swing.GroupLayout jdFileChooserLayout = new javax.swing.GroupLayout(jdFileChooser.getContentPane());
-        jdFileChooser.getContentPane().setLayout(jdFileChooserLayout);
-        jdFileChooserLayout.setHorizontalGroup(
-            jdFileChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdFileChooserLayout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jdFileChooserLayout.setVerticalGroup(
-            jdFileChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdFileChooserLayout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("jEnkryptor");
@@ -391,7 +374,6 @@ public class MainJFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -402,7 +384,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbFileOpen;
     private javax.swing.JButton jbProcess;
-    private javax.swing.JDialog jdFileChooser;
     private javax.swing.JLabel jlStatus;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
