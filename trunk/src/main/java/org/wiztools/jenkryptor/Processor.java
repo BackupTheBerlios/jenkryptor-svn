@@ -15,13 +15,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.SwingUtilities;
 import static org.wiztools.jenkryptor.Globals.*;
 import org.wiztools.wizcrypt.Callback;
 import org.wiztools.wizcrypt.CipherKey;
 import org.wiztools.wizcrypt.CipherKeyGen;
+import org.wiztools.wizcrypt.PasswordMismatchException;
 import org.wiztools.wizcrypt.WizCrypt;
 
 /**
@@ -63,30 +67,47 @@ public class Processor {
                         Callback cb = new WizCryptCallback(file, lpe);
                         
                         long fileSize = file.length();
-                        InputStream is = new FileInputStream(file);
                         
-                        String filePath = file.getCanonicalPath();
-                        
-                        if(mode == MODE_ENCRYPT){
-                            OutputStream os = new FileOutputStream(filePath + ".wiz");
-                            
-                            CipherKey ck = CipherKeyGen.getCipherKeyForEncrypt(password);
-                            
-                            WizCrypt.encrypt(is, os, ck, cb, fileSize);
+                        try{
+                            InputStream is = new FileInputStream(file);
+
+                            String filePath = file.getCanonicalPath();
+
+                            if(mode == MODE_ENCRYPT){
+                                OutputStream os = new FileOutputStream(filePath + ".wiz");
+
+                                CipherKey ck = CipherKeyGen.getCipherKeyForEncrypt(password);
+
+                                WizCrypt.encrypt(is, os, ck, cb, fileSize);
+                            }
+                            else{
+                                String outPath = filePath.replaceFirst(".wiz$", "");
+                                OutputStream os = new FileOutputStream(outPath);
+
+                                CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
+
+                                WizCrypt.decrypt(is, os, ck, cb, fileSize);
+                            }
                         }
-                        else{
-                            String outPath = filePath.replaceFirst(".wiz$", "");
-                            OutputStream os = new FileOutputStream(outPath);
-                            
-                            CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
-                            
-                            WizCrypt.decrypt(is, os, ck, cb, fileSize);
+                        catch(PasswordMismatchException e){
+                            Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
+                        }
+                        catch(IOException e){
+                            Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
                         }
                         
                     }
-                    catch(Exception e){
+                    catch(InterruptedException e){
                         Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
-                        e.printStackTrace();
+                    }
+                    catch(NoSuchAlgorithmException e){
+                        Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
+                    }
+                    catch(InvalidKeyException e){
+                        Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
+                    }
+                    catch(NoSuchPaddingException e){
+                        Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
                     }
                     finally{
                         if(gotLPE){
