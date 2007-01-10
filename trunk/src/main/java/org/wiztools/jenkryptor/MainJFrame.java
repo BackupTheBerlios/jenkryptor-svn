@@ -15,6 +15,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import org.wiztools.jenkryptor.util.FileUtil;
+import org.wiztools.jenkryptor.validation.MixedFilesValidator;
+import org.wiztools.jenkryptor.validation.SameFileValidator;
+import org.wiztools.jenkryptor.validation.Validator;
+import org.wiztools.jenkryptor.validation.ValidatorException;
 
 /**
  *
@@ -319,44 +325,38 @@ public class MainJFrame extends javax.swing.JFrame {
         File[] files = jfc.getSelectedFiles();
 
         if(files == null || files.length == 0){
-            JOptionPane.showMessageDialog(this, "No file selected!", "No file selected!", JOptionPane.ERROR_MESSAGE);
+            // JOptionPane.showMessageDialog(this, "No file selected!", "No file selected!", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        StringBuffer sb = new StringBuffer();
+        Validator v = new MixedFilesValidator().setNext(
+                new SameFileValidator().setNext(null)
+                );
+        try{
+            v.validate(files);
+        }
+        catch(ValidatorException ve){
+            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validation Error!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         try{
-            int filesEndingWithWiz = 0;
-            for(int i=0; i<files.length; i++){
-                String path = files[i].getCanonicalPath();
-                if(path.endsWith(".wiz")){
-                    filesEndingWithWiz += 1;
+            final String filesCSV = FileUtil.getFileNamesCSV(files);
+            SwingUtilities.invokeLater(new Runnable(){
+                public void run(){
+                    jtfFiles.setText(filesCSV);
                 }
-                path = path.replaceAll("\"", "\\\"");
-                sb.append('"').append(path).append('"').append(',');
-            }
-            sb.deleteCharAt(sb.length()-1);
+            });
             
-            Globals.mode = Globals.MODE_ENCRYPT;
-            if(files.length == filesEndingWithWiz){
-                Globals.mode = Globals.MODE_DECRYPT;
-                Globals.msgDisplayer.setStatus("Decrypt mode set");
-            }
-            else if(filesEndingWithWiz != 0 && files.length > filesEndingWithWiz){
-                JOptionPane.showMessageDialog(this, "One mode!", "Please select one type of file!", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            else{
-                Globals.msgDisplayer.setStatus("Encrypt mode set");
-            }
             
-            jtfFiles.setText(sb.toString());
-            
-            Globals.files = files;
+        }
+        catch(ValidatorException ve){
+            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validation Error!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         catch(IOException ioe){
             Globals.msgDisplayer.appendMessage("ERROR: "+ioe.getMessage());
-            ioe.printStackTrace();
+            return;
         }
         
     }//GEN-LAST:event_jbFileOpenActionPerformed
