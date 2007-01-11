@@ -10,7 +10,6 @@
 package org.wiztools.jenkryptor;
 
 import java.io.File;
-import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -19,8 +18,6 @@ import java.util.concurrent.Semaphore;
 public class Globals {
     
     public static final int THREAD_SIZE = 6;
-    
-    public static final Semaphore SEMAPHORE = new Semaphore(THREAD_SIZE);
     
     public static final ProgressBarProvisioningManager PBPM = new 
             ProgressBarProvisioningManager(Globals.THREAD_SIZE);
@@ -37,6 +34,8 @@ public class Globals {
     public static String password;
     
     public static MessageDisplay msgDisplayer;
+    
+    public static MainJFrame MAIN_FRAME;
     
     /** Creates a new instance of Globals */
     private Globals() {

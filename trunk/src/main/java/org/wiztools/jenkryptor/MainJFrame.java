@@ -6,10 +6,17 @@
 
 package org.wiztools.jenkryptor;
 
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -66,6 +73,77 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         
         Globals.msgDisplayer = new MessageDisplay(jlStatus, jtaMessage);
+        
+        Globals.MAIN_FRAME = this;
+    }
+    
+    class FreezeKeyListener implements KeyListener{
+        public void keyPressed(KeyEvent e) {
+        }
+        public void keyReleased(KeyEvent e) {
+        }
+        public void keyTyped(KeyEvent e) {
+        }
+    }
+    
+    class FreezeMouseListener implements MouseListener{
+        public void mouseClicked(MouseEvent e) {
+        }
+        public void mouseEntered(MouseEvent e) {
+        }
+        public void mouseExited(MouseEvent e) {
+        }
+        public void mousePressed(MouseEvent e) {
+        }
+        public void mouseReleased(MouseEvent e) {
+        }
+    }
+    
+    private final FreezeKeyListener FREEZE_KEY_LISTENER = new FreezeKeyListener();
+    private final FreezeMouseListener FREEZE_MOUSE_LISTENER = new FreezeMouseListener();
+    
+    private final Cursor DEFAULT_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+    private final Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+    
+    public void freeze(){
+        final Component gpane = this.getGlassPane();
+
+        gpane.addKeyListener(FREEZE_KEY_LISTENER);
+        gpane.addMouseListener(FREEZE_MOUSE_LISTENER);
+        try{
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    gpane.setCursor(WAIT_CURSOR);
+                    gpane.setVisible(true);
+                }
+            });
+        }
+        catch(InvocationTargetException ite){
+            ite.printStackTrace();
+        }
+        catch(InterruptedException ie){
+            ie.printStackTrace();
+        }
+    }
+    
+    public void unfreeze(){
+        final Component gpane = this.getGlassPane();
+        try{
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    gpane.removeKeyListener(FREEZE_KEY_LISTENER);
+                    gpane.removeMouseListener(FREEZE_MOUSE_LISTENER);
+                    gpane.setVisible(false);
+                    gpane.setCursor(DEFAULT_CURSOR);
+                }
+            });
+        }
+        catch(InvocationTargetException ite){
+            ite.printStackTrace();
+        }
+        catch(InterruptedException ie){
+            ie.printStackTrace();
+        }
     }
     
     /** This method is called from within the constructor to
