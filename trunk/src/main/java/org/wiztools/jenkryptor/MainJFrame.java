@@ -23,6 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 import org.wiztools.jenkryptor.util.FileUtil;
 import org.wiztools.jenkryptor.validation.MixedFilesValidator;
 import org.wiztools.jenkryptor.validation.SameFileValidator;
@@ -37,6 +38,7 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private JFileChooser jfc = new JFileChooser();
     
+    // CoR pattern used for Validation
     private final Validator validator = new MixedFilesValidator().setNext(
                 new SameFileValidator().setNext(null)
                 );
@@ -51,7 +53,28 @@ public class MainJFrame extends javax.swing.JFrame {
         
         this.setResizable(false);
         
+        // Configure the JFileChooser
         jfc.setMultiSelectionEnabled(true);
+        jfc.setFileHidingEnabled(false);
+        jfc.setAcceptAllFileFilterUsed(false);
+        jfc.addChoosableFileFilter(new FileFilter() {
+            public boolean accept(File f) {
+                return f.getAbsolutePath()
+                    .toLowerCase().endsWith(".wiz")?true:false;
+            }
+            public String getDescription() {
+                return "Encrypted files (*.wiz)";
+            }
+        });
+        jfc.addChoosableFileFilter(new FileFilter() {
+            public boolean accept(File f) {
+                return true;
+            }
+            public String getDescription() {
+                return "All files";
+            }
+        });
+        
         
         jpScrollbar.setLayout(new GridLayout(Globals.THREAD_SIZE, 2));
         
