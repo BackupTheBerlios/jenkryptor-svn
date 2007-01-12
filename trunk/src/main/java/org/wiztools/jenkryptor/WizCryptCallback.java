@@ -32,13 +32,8 @@ public class WizCryptCallback implements Callback {
 
     public void begin() {
         originalLabel = lpe.getLabelText();
-        try{
-            String path = StringUtil.getCompactedPath(file.getCanonicalPath());
-            lpe.setLabel(path);
-        }
-        catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+        String path = StringUtil.getCompactedPath(file.getAbsolutePath());
+        lpe.setLabel(path);
     }
 
     public void notifyProgress(long value) {
