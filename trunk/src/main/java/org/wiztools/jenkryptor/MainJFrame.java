@@ -195,7 +195,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmtExit = new javax.swing.JMenuItem();
-        jmPreferences = new javax.swing.JMenu();
+        jmTools = new javax.swing.JMenu();
+        jmiPreferences = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
         jmtAbout = new javax.swing.JMenuItem();
 
@@ -353,15 +354,19 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jMenuBar2.add(jmFile);
 
-        jmPreferences.setMnemonic('p');
-        jmPreferences.setText("Preferences");
-        jmPreferences.addActionListener(new java.awt.event.ActionListener() {
+        jmTools.setMnemonic('p');
+        jmTools.setText("Tools");
+        jmTools.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmPreferencesActionPerformed(evt);
+                jmToolsActionPerformed(evt);
             }
         });
 
-        jMenuBar2.add(jmPreferences);
+        jmiPreferences.setMnemonic('r');
+        jmiPreferences.setText("Preferences");
+        jmTools.add(jmiPreferences);
+
+        jMenuBar2.add(jmTools);
 
         jmHelp.setMnemonic('h');
         jmHelp.setText("Help");
@@ -390,9 +395,9 @@ public class MainJFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jmtExitActionPerformed
 
-    private void jmPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPreferencesActionPerformed
+    private void jmToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmToolsActionPerformed
 // TODO add your handling code here:
-    }//GEN-LAST:event_jmPreferencesActionPerformed
+    }//GEN-LAST:event_jmToolsActionPerformed
 
     private void jmFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFileActionPerformed
 // TODO add your handling code here:
@@ -479,7 +484,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jlStatus;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
-    private javax.swing.JMenu jmPreferences;
+    private javax.swing.JMenu jmTools;
+    private javax.swing.JMenuItem jmiPreferences;
     private javax.swing.JMenuItem jmtAbout;
     private javax.swing.JMenuItem jmtExit;
     private javax.swing.JPanel jpScrollbar;

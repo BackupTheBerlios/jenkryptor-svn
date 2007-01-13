@@ -24,14 +24,22 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jmPreferences">
+        <Menu class="javax.swing.JMenu" name="jmTools">
           <Properties>
             <Property name="mnemonic" type="int" value="112"/>
-            <Property name="text" type="java.lang.String" value="Preferences"/>
+            <Property name="text" type="java.lang.String" value="Tools"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmPreferencesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmToolsActionPerformed"/>
           </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPreferences">
+              <Properties>
+                <Property name="mnemonic" type="int" value="114"/>
+                <Property name="text" type="java.lang.String" value="Preferences"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmHelp">
           <Properties>
