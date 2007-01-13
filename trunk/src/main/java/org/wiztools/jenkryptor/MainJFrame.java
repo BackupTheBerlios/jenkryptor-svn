@@ -354,7 +354,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jMenuBar2.add(jmFile);
 
-        jmTools.setMnemonic('p');
+        jmTools.setMnemonic('t');
         jmTools.setText("Tools");
         jmTools.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
