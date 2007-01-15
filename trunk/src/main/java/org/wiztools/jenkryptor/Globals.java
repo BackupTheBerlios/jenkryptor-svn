@@ -37,9 +37,6 @@ public class Globals {
     
     public static MainJFrame MAIN_FRAME;
     
-    public static boolean overwriteDestination_pref = false;
-    public static boolean deleteSource_pref = true;
-    
     /** Creates a new instance of Globals */
     private Globals() {
     }

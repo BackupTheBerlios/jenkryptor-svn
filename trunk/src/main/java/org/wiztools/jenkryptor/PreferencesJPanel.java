@@ -119,8 +119,8 @@ public class PreferencesJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed
-        Globals.overwriteDestination_pref = jcbOverwriteDest.isSelected();
-        Globals.deleteSource_pref = jcbDeleteSource.isSelected();
+        Preferences.overwriteDestination_pref = jcbOverwriteDest.isSelected();
+        Preferences.deleteSource_pref = jcbDeleteSource.isSelected();
         Globals.MAIN_FRAME.setJDVisible(false);
     }//GEN-LAST:event_jbOkActionPerformed
 

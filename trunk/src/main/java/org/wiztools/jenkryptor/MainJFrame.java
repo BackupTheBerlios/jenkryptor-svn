@@ -106,6 +106,7 @@ public class MainJFrame extends javax.swing.JFrame {
         Globals.MAIN_FRAME = this;
         
         jd = new JDialog(this);
+        jd.setResizable(false);
         
     }
     
@@ -433,8 +434,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jmiPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPreferencesActionPerformed
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
-                jpPreferences.setPreferences(Globals.overwriteDestination_pref,
-                        Globals.deleteSource_pref);
+                jpPreferences.setPreferences(Preferences.overwriteDestination_pref,
+                        Preferences.deleteSource_pref);
                 jd.setContentPane(jpPreferences);
                 jd.pack();
                 jd.setVisible(true);

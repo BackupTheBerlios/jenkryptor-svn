@@ -6,6 +6,7 @@
 
 package org.wiztools.jenkryptor;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.SwingUtilities;
@@ -19,6 +20,8 @@ public class AboutJPanel extends javax.swing.JPanel {
     /** Creates new form AboutJPanel */
     public AboutJPanel() {
         initComponents();
+        
+        jTextArea1.setFont(new Font("Monospaced", Font.PLAIN, 12));
         
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("org/wiztools/jenkryptor/ABOUT");
         try{
@@ -59,10 +62,10 @@ public class AboutJPanel extends javax.swing.JPanel {
 
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 10));
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jbOk.setMnemonic('o');
         jbOk.setText("Ok");
         jbOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,9 +80,9 @@ public class AboutJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                    .addComponent(jbOk, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                    .addComponent(jbOk, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -88,10 +91,10 @@ public class AboutJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbOk)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
