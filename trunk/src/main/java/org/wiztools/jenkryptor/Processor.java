@@ -101,11 +101,23 @@ public class Processor {
                     String filePath = file.getAbsolutePath();
 
                     if(mode == MODE_ENCRYPT){
-                        OutputStream os = new FileOutputStream(filePath + ".wiz");
+                        File outFile = new File(filePath + ".wiz");
+                        if(!outFile.exists() || 
+                                (outFile.exists() && Preferences.overwriteDestination_pref)){
+                            OutputStream os = new FileOutputStream(outFile);
 
-                        CipherKey ck = CipherKeyGen.getCipherKeyForEncrypt(password);
+                            CipherKey ck = CipherKeyGen.getCipherKeyForEncrypt(password);
 
-                        WizCrypt.encrypt(is, os, ck, cb, fileSize);
+                            WizCrypt.encrypt(is, os, ck, cb, fileSize);
+                            
+                            if(Preferences.deleteSource_pref){
+                                file.delete();
+                            }
+                        }
+                        else{
+                            Globals.msgDisplayer.appendMessage("SKIPPING: "
+                                    + outFile.getAbsolutePath() + " exists!");
+                        }
                     }
                     else{
                         String outPath = filePath.replaceFirst(".wiz$", "");
@@ -114,6 +126,9 @@ public class Processor {
                         CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
 
                         WizCrypt.decrypt(is, os, ck, cb, fileSize);
+                        if(Preferences.deleteSource_pref){
+                            file.delete();
+                        }
                     }
                 }
                 catch(PasswordMismatchException e){
