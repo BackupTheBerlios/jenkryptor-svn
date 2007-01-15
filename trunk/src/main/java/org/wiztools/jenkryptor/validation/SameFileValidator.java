@@ -30,7 +30,6 @@ public class SameFileValidator extends Validator {
         try{
             for(File f: files){
                 String absPath = f.getCanonicalPath();
-                System.out.println("absPath: "+absPath);
                 if(ll.contains(absPath)){
                     throw new ValidatorException("Duplicate files: "
                             +absPath);

@@ -85,9 +85,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jpScrollbar.setLayout(new GridLayout(Globals.THREAD_SIZE, 2));
         
         LabelProgressbarEnsc[] lpe_arr = Globals.PBPM.getLPEArr();
-        System.out.println("Globals.THREAD_SIZE: "+Globals.THREAD_SIZE);
         for(int i=0; i<Globals.THREAD_SIZE; i++){
-            System.out.println("~i: "+i);
             LabelProgressbarEnsc lpbe = lpe_arr[i];
             
             JPanel jp_label = new JPanel();

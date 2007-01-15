@@ -32,7 +32,6 @@ public class AboutJPanel extends javax.swing.JPanel {
                 sb.append(new String(buffer, 0, i));
             }
             is.close();
-            System.out.println();
             
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
