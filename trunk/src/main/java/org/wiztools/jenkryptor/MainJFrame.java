@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -111,6 +113,10 @@ public class MainJFrame extends javax.swing.JFrame {
     public void setJDVisible(final boolean bool){
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
+                JFrame jf = Globals.MAIN_FRAME;
+                Point p = jf.getLocation();
+                jd.pack();
+                jd.setLocation(p.x+(jf.getWidth()-jd.getWidth())/2, p.y+(jf.getHeight()-jd.getHeight())/2);
                 jd.setVisible(bool);
             }
         });
@@ -423,8 +429,7 @@ public class MainJFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
                 jd.setContentPane(jpAbout);
-                jd.pack();
-                jd.setVisible(true);
+                setJDVisible(true);
             }
         });
     }//GEN-LAST:event_jmtAboutActionPerformed
@@ -435,8 +440,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 jpPreferences.setPreferences(Preferences.overwriteDestination_pref,
                         Preferences.deleteSource_pref);
                 jd.setContentPane(jpPreferences);
-                jd.pack();
-                jd.setVisible(true);
+                setJDVisible(true);
             }
         });
         
