@@ -6,6 +6,10 @@
 
 package org.wiztools.jenkryptor;
 
+import java.io.IOException;
+import java.io.InputStream;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author  subhash
@@ -15,6 +19,26 @@ public class AboutJPanel extends javax.swing.JPanel {
     /** Creates new form AboutJPanel */
     public AboutJPanel() {
         initComponents();
+        
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("org/wiztools/jenkryptor/ABOUT");
+        try{
+            int i = -1;
+            byte[] buffer = new byte[0xFFFF];
+            final StringBuffer sb = new StringBuffer();
+            while((i=is.read(buffer))!=-1){
+                sb.append(new String(buffer, 0, i));
+            }
+            is.close();
+            System.out.println();
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    jTextArea1.setText(sb.toString());
+                }
+            });
+        } catch(IOException ioe) {
+            assert true: "ABOUT file not found in Jar!";
+        }
     }
     
     /** This method is called from within the constructor to
@@ -24,21 +48,63 @@ public class AboutJPanel extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jbOk = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("jEnkryptor");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setEditable(false);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 10));
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jbOk.setText("Ok");
+        jbOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jbOk, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbOk)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed
+        Globals.MAIN_FRAME.setJDVisible(false);
+    }//GEN-LAST:event_jbOkActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jbOk;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -19,6 +19,15 @@ public class PreferencesJPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void setPreferences(final boolean overwriteDest, final boolean delSrc){
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                jcbOverwriteDest.setSelected(overwriteDest);
+                jcbDeleteSource.setSelected(delSrc);
+            }
+        });
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -27,16 +36,16 @@ public class PreferencesJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
-        jcbForceDelDest = new javax.swing.JCheckBox();
+        jcbOverwriteDest = new javax.swing.JCheckBox();
         jcbDeleteSource = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbOk = new javax.swing.JButton();
+        jbCancel = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Preferences"));
-        jcbForceDelDest.setText("Force Delete Destination File?");
-        jcbForceDelDest.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jcbForceDelDest.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jcbOverwriteDest.setText("Overwrite Destination File?");
+        jcbOverwriteDest.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jcbOverwriteDest.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jcbDeleteSource.setSelected(true);
         jcbDeleteSource.setText("Delete Source File After Encrypting/Decrypting");
@@ -50,9 +59,19 @@ public class PreferencesJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Ok");
+        jbOk.setText("Ok");
+        jbOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbOkActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancel");
+        jbCancel.setText("Cancel");
+        jbCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,10 +84,10 @@ public class PreferencesJPanel extends javax.swing.JPanel {
                         .addGap(17, 17, 17)
                         .addComponent(jButton1)
                         .addGap(23, 23, 23)
-                        .addComponent(jButton3)
+                        .addComponent(jbCancel)
                         .addGap(23, 23, 23)
-                        .addComponent(jButton2))
-                    .addComponent(jcbForceDelDest, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbOk))
+                    .addComponent(jcbOverwriteDest, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbDeleteSource, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -76,14 +95,14 @@ public class PreferencesJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jcbForceDelDest)
+                .addComponent(jcbOverwriteDest)
                 .addGap(16, 16, 16)
                 .addComponent(jcbDeleteSource)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jbOk)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(jbCancel))
                 .addContainerGap())
         );
 
@@ -99,11 +118,22 @@ public class PreferencesJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed
+        Globals.overwriteDestination_pref = jcbOverwriteDest.isSelected();
+        Globals.deleteSource_pref = jcbDeleteSource.isSelected();
+        Globals.MAIN_FRAME.setJDVisible(false);
+    }//GEN-LAST:event_jbOkActionPerformed
+
+    private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
+        Globals.MAIN_FRAME.setJDVisible(false);
+    }//GEN-LAST:event_jbCancelActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
-                jcbForceDelDest.setSelected(false);
+                jcbOverwriteDest.setSelected(false);
                 jcbDeleteSource.setSelected(true);
+                Globals.MAIN_FRAME.setJDVisible(false);
             }
         });
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -111,11 +141,11 @@ public class PreferencesJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbOk;
     private javax.swing.JCheckBox jcbDeleteSource;
-    private javax.swing.JCheckBox jcbForceDelDest;
+    private javax.swing.JCheckBox jcbOverwriteDest;
     // End of variables declaration//GEN-END:variables
     
 }

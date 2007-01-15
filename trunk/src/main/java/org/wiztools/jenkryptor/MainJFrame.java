@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,6 +38,11 @@ import org.wiztools.jenkryptor.validation.ValidatorException;
 public class MainJFrame extends javax.swing.JFrame {
     
     private JFileChooser jfc = new JFileChooser();
+    
+    private JDialog jd = null;
+    
+    private PreferencesJPanel jpPreferences = new PreferencesJPanel();
+    private JPanel jpAbout = new AboutJPanel();
     
     // CoR pattern used for Validation
     private final Validator validator = new MixedFilesValidator().setNext(
@@ -98,6 +104,17 @@ public class MainJFrame extends javax.swing.JFrame {
         Globals.msgDisplayer = new MessageDisplay(jlStatus, jtaMessage);
         
         Globals.MAIN_FRAME = this;
+        
+        jd = new JDialog(this);
+        
+    }
+    
+    public void setJDVisible(final boolean bool){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                jd.setVisible(bool);
+            }
+        });
     }
     
     class FreezeKeyListener implements KeyListener{
@@ -364,6 +381,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jmiPreferences.setMnemonic('r');
         jmiPreferences.setText("Preferences");
+        jmiPreferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPreferencesActionPerformed(evt);
+            }
+        });
+
         jmTools.add(jmiPreferences);
 
         jMenuBar2.add(jmTools);
@@ -372,6 +395,12 @@ public class MainJFrame extends javax.swing.JFrame {
         jmHelp.setText("Help");
         jmtAbout.setMnemonic('a');
         jmtAbout.setText("About");
+        jmtAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmtAboutActionPerformed(evt);
+            }
+        });
+
         jmHelp.add(jmtAbout);
 
         jMenuBar2.add(jmHelp);
@@ -390,6 +419,29 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmtAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtAboutActionPerformed
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                jd.setContentPane(jpAbout);
+                jd.pack();
+                jd.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jmtAboutActionPerformed
+
+    private void jmiPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPreferencesActionPerformed
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                jpPreferences.setPreferences(Globals.overwriteDestination_pref,
+                        Globals.deleteSource_pref);
+                jd.setContentPane(jpPreferences);
+                jd.pack();
+                jd.setVisible(true);
+            }
+        });
+        
+    }//GEN-LAST:event_jmiPreferencesActionPerformed
 
     private void jmtExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtExitActionPerformed
         System.exit(0);
