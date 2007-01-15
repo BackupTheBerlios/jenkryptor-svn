@@ -9,9 +9,6 @@
 
 package org.wiztools.jenkryptor;
 
-import org.picocontainer.MutablePicoContainer;
-import org.picocontainer.defaults.DefaultPicoContainer;
-
 /**
  *
  * @author schandran
@@ -20,9 +17,6 @@ public class Main {
     
     /** Creates a new instance of Main */
     public static void main(String[] str) {
-        MutablePicoContainer pico = new DefaultPicoContainer();
-        
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainJFrame().setVisible(true);

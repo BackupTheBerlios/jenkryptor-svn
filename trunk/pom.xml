@@ -58,6 +58,7 @@
             </build>
         </profile>
     </profiles>
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -71,4 +72,65 @@
             <version>2.2</version>
         </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>webstart-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jnlp</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--outputDirectory></outputDirectory--> <!-- not required?? -->
+
+                    <!-- JNLP generation -->
+                    <jnlp>
+                        <!-- default values -->
+                        <!--resources>${project.basedir}/src/main/jnlp</resources-->
+                        <!--inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath-->
+                        <!--inputTemplate>src/jnlp/template.vm</inputTemplate--> <!-- relative to inputTemplateResourcePath -->
+                        <outputFile>jenkryptor.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+
+                        <mainClass>org.wiztools.jenkryptor.Main</mainClass>
+                    </jnlp>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib</classpathPrefix>
+                            <mainClass>org.wiztools.jenkryptor.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.wiztools.jenkryptor.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
