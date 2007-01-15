@@ -70,10 +70,5 @@
             <artifactId>wizcrypt</artifactId>
             <version>2.2</version>
         </dependency>
-        <dependency>
-            <groupId>picocontainer</groupId>
-            <artifactId>picocontainer</artifactId>
-            <version>1.2</version>
-        </dependency>
     </dependencies>
 </project>
