@@ -133,7 +133,6 @@ public class PreferencesJPanel extends javax.swing.JPanel {
             public void run(){
                 jcbOverwriteDest.setSelected(false);
                 jcbDeleteSource.setSelected(true);
-                Globals.MAIN_FRAME.setJDVisible(false);
             }
         });
     }//GEN-LAST:event_jButton1ActionPerformed
