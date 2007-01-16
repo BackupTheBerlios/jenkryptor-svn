@@ -483,6 +483,7 @@ public class MainJFrame extends javax.swing.JFrame {
         
         Globals.password = new String(pwd1);
         
+        Globals.msgDisplayer.clear();
         Processor.getInstance().process();
     }//GEN-LAST:event_jbProcessActionPerformed
 

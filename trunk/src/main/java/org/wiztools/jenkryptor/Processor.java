@@ -110,6 +110,8 @@ public class Processor {
 
                             WizCrypt.encrypt(is, os, ck, cb, fileSize);
                             
+                            Globals.msgDisplayer.appendMessage("Done: " + outFile.getAbsolutePath());
+                            
                             if(Preferences.deleteSource_pref){
                                 file.delete();
                             }
@@ -126,6 +128,9 @@ public class Processor {
                         CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
 
                         WizCrypt.decrypt(is, os, ck, cb, fileSize);
+                        
+                        Globals.msgDisplayer.appendMessage("Done: " + outPath);
+                        
                         if(Preferences.deleteSource_pref){
                             file.delete();
                         }

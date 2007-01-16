@@ -43,4 +43,12 @@ public class MessageDisplay {
             }
         });
     }
+    
+    public void clear(){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                jta.setText("");
+            }
+        });
+    }
 }
