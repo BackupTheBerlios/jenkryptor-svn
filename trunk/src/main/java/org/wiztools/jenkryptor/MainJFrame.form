@@ -24,6 +24,23 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jmEdit">
+          <Properties>
+            <Property name="mnemonic" type="int" value="101"/>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmtClearLog">
+              <Properties>
+                <Property name="mnemonic" type="int" value="99"/>
+                <Property name="text" type="java.lang.String" value="Clear Log"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmtClearLogActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jmTools">
           <Properties>
             <Property name="mnemonic" type="int" value="116"/>
@@ -65,7 +82,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="jEnkryptor"/>
   </Properties>
   <SyntheticProperties>
@@ -266,7 +283,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jbProcess">
               <Properties>
-                <Property name="mnemonic" type="int" value="101"/>
+                <Property name="mnemonic" type="int" value="121"/>
                 <Property name="text" type="java.lang.String" value="Encrypt / Decrypt"/>
               </Properties>
               <Events>

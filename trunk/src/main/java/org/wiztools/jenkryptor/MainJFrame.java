@@ -15,6 +15,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -58,6 +60,13 @@ public class MainJFrame extends javax.swing.JFrame {
         setIconImage(new ImageIcon(
                 this.getClass().getClassLoader().getResource(
                 "org/wiztools/jenkryptor/logo.png")).getImage());
+        
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we){
+                exit(0);
+            }
+        });
         
         this.setResizable(false);
         
@@ -108,6 +117,17 @@ public class MainJFrame extends javax.swing.JFrame {
         jd = new JDialog(this);
         jd.setResizable(false);
         
+    }
+    
+    public void exit(final int status){
+        if(Globals.isRunning){
+            JOptionPane.showMessageDialog(Globals.MAIN_FRAME, 
+                    "Encryption/Decryption Operation in progress. . .",
+                    "Cannot close!", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            System.exit(status);
+        }
     }
     
     public void setJDVisible(final boolean bool){
@@ -217,12 +237,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
         jmtExit = new javax.swing.JMenuItem();
+        jmEdit = new javax.swing.JMenu();
+        jmtClearLog = new javax.swing.JMenuItem();
         jmTools = new javax.swing.JMenu();
         jmiPreferences = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
         jmtAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("jEnkryptor");
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jlStatus.setText("jEnkryptor");
@@ -260,7 +282,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Re-enter Password (only for encrypt):");
 
-        jbProcess.setMnemonic('e');
+        jbProcess.setMnemonic('y');
         jbProcess.setText("Encrypt / Decrypt");
         jbProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,6 +398,20 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jMenuBar2.add(jmFile);
 
+        jmEdit.setMnemonic('e');
+        jmEdit.setText("Edit");
+        jmtClearLog.setMnemonic('c');
+        jmtClearLog.setText("Clear Log");
+        jmtClearLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmtClearLogActionPerformed(evt);
+            }
+        });
+
+        jmEdit.add(jmtClearLog);
+
+        jMenuBar2.add(jmEdit);
+
         jmTools.setMnemonic('t');
         jmTools.setText("Tools");
         jmTools.addActionListener(new java.awt.event.ActionListener() {
@@ -425,6 +461,10 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jmtClearLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtClearLogActionPerformed
+        Globals.msgDisplayer.clear();
+    }//GEN-LAST:event_jmtClearLogActionPerformed
+
     private void jmtAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtAboutActionPerformed
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
@@ -447,7 +487,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiPreferencesActionPerformed
 
     private void jmtExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtExitActionPerformed
-        System.exit(0);
+        exit(0);
     }//GEN-LAST:event_jmtExitActionPerformed
 
     private void jmToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmToolsActionPerformed
@@ -538,11 +578,13 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jbFileOpen;
     private javax.swing.JButton jbProcess;
     private javax.swing.JLabel jlStatus;
+    private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
     private javax.swing.JMenu jmTools;
     private javax.swing.JMenuItem jmiPreferences;
     private javax.swing.JMenuItem jmtAbout;
+    private javax.swing.JMenuItem jmtClearLog;
     private javax.swing.JMenuItem jmtExit;
     private javax.swing.JPanel jpScrollbar;
     private javax.swing.JPasswordField jpf1;

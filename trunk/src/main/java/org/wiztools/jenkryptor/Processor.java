@@ -48,6 +48,7 @@ public class Processor {
     public void process(){
         Runnable process = new Runnable(){
             public void run(){
+                Globals.isRunning = true;
                 Globals.MAIN_FRAME.freeze();
                 msgDisplayer.setStatus("Processing. . .");
         
@@ -68,6 +69,7 @@ public class Processor {
                     ie.printStackTrace();
                 }
                 Globals.MAIN_FRAME.unfreeze();
+                Globals.isRunning = false;
             }
         };
         

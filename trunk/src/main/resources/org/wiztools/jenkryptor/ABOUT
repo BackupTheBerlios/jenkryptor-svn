@@ -5,7 +5,7 @@ jEnkryptor is Java based cross-platform
 encryption software. It internally uses
 the WizCrypt encryption engine:
 
-http://wiztools.org/project/WizCrypt/
+http://wizcrypt.wiztools.org/
 
 The project page of jEncryptor is:
 
