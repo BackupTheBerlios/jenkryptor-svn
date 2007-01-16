@@ -238,7 +238,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jmFile = new javax.swing.JMenu();
         jmtExit = new javax.swing.JMenuItem();
         jmEdit = new javax.swing.JMenu();
-        jmtClearLog = new javax.swing.JMenuItem();
+        jmiClearLog = new javax.swing.JMenuItem();
+        jmiClearFileSelection = new javax.swing.JMenuItem();
+        jmiClearPassword = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        jmiClearAll = new javax.swing.JMenuItem();
         jmTools = new javax.swing.JMenu();
         jmiPreferences = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
@@ -331,7 +335,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbProcess)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpScrollbarLayout = new javax.swing.GroupLayout(jpScrollbar);
@@ -400,15 +404,47 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jmEdit.setMnemonic('e');
         jmEdit.setText("Edit");
-        jmtClearLog.setMnemonic('c');
-        jmtClearLog.setText("Clear Log");
-        jmtClearLog.addActionListener(new java.awt.event.ActionListener() {
+        jmiClearLog.setMnemonic('l');
+        jmiClearLog.setText("Clear Log");
+        jmiClearLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmtClearLogActionPerformed(evt);
+                jmiClearLogActionPerformed(evt);
             }
         });
 
-        jmEdit.add(jmtClearLog);
+        jmEdit.add(jmiClearLog);
+
+        jmiClearFileSelection.setMnemonic('f');
+        jmiClearFileSelection.setText("Clear File Selection");
+        jmiClearFileSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiClearFileSelectionActionPerformed(evt);
+            }
+        });
+
+        jmEdit.add(jmiClearFileSelection);
+
+        jmiClearPassword.setMnemonic('p');
+        jmiClearPassword.setText("Clear Password Fields");
+        jmiClearPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiClearPasswordActionPerformed(evt);
+            }
+        });
+
+        jmEdit.add(jmiClearPassword);
+
+        jmEdit.add(jSeparator1);
+
+        jmiClearAll.setMnemonic('a');
+        jmiClearAll.setText("Clear All");
+        jmiClearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiClearAllActionPerformed(evt);
+            }
+        });
+
+        jmEdit.add(jmiClearAll);
 
         jMenuBar2.add(jmEdit);
 
@@ -461,9 +497,45 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmtClearLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtClearLogActionPerformed
+    private void jmiClearPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClearPasswordActionPerformed
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                clearPasswordFields();
+            }
+        });
+    }//GEN-LAST:event_jmiClearPasswordActionPerformed
+
+    private void jmiClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClearAllActionPerformed
+        clearFileSelection();
         Globals.msgDisplayer.clear();
-    }//GEN-LAST:event_jmtClearLogActionPerformed
+        clearPasswordFields();
+    }//GEN-LAST:event_jmiClearAllActionPerformed
+
+    private void clearPasswordFields(){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                jpf1.setText("");
+                jpf2.setText("");
+            }
+        });
+    }
+    
+    private void clearFileSelection(){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                Globals.files = null;
+                jtfFiles.setText("");
+            }
+        });
+    }
+    
+    private void jmiClearFileSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClearFileSelectionActionPerformed
+        clearFileSelection();
+    }//GEN-LAST:event_jmiClearFileSelectionActionPerformed
+
+    private void jmiClearLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClearLogActionPerformed
+        Globals.msgDisplayer.clear();
+    }//GEN-LAST:event_jmiClearLogActionPerformed
 
     private void jmtAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmtAboutActionPerformed
         SwingUtilities.invokeLater(new Runnable(){
@@ -499,24 +571,33 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jmFileActionPerformed
 
     private void jbProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProcessActionPerformed
+        
+        if(Globals.files == null){
+            final String msg = "No files selected!";
+            JOptionPane.showMessageDialog(this, msg, msg, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         char[] pwd1 = jpf1.getPassword();
         char[] pwd2 = jpf2.getPassword();
         
         if(pwd1.length == 0){
-            JOptionPane.showMessageDialog(this, "Password is empty!", "Password is empty!", JOptionPane.ERROR_MESSAGE);
+            final String msg = "Password is empty!";
+            JOptionPane.showMessageDialog(this, msg, msg, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
+        final String msg = "Password not equal!";
         if(Globals.mode == Globals.MODE_ENCRYPT){
             if(!Arrays.equals(pwd1, pwd2)){
-                JOptionPane.showMessageDialog(this, "Password not equal!", "Password not equal!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, msg, msg, JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
         
         if(Globals.mode == Globals.MODE_DECRYPT){
             if(pwd2.length != 0 && !Arrays.equals(pwd1, pwd2)){
-                JOptionPane.showMessageDialog(this, "Password not equal!", "Password not equal!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, msg, msg, JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -575,6 +656,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbFileOpen;
     private javax.swing.JButton jbProcess;
     private javax.swing.JLabel jlStatus;
@@ -582,9 +664,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
     private javax.swing.JMenu jmTools;
+    private javax.swing.JMenuItem jmiClearAll;
+    private javax.swing.JMenuItem jmiClearFileSelection;
+    private javax.swing.JMenuItem jmiClearLog;
+    private javax.swing.JMenuItem jmiClearPassword;
     private javax.swing.JMenuItem jmiPreferences;
     private javax.swing.JMenuItem jmtAbout;
-    private javax.swing.JMenuItem jmtClearLog;
     private javax.swing.JMenuItem jmtExit;
     private javax.swing.JPanel jpScrollbar;
     private javax.swing.JPasswordField jpf1;
