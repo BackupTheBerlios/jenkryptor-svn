@@ -4,7 +4,7 @@
     <groupId>org.wiztools</groupId>
     <artifactId>jenkryptor</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-b1</version>
     <name>jEnkryptor</name>
     <url>http://wiztools.org/project/jEnkryptor/</url>
     
