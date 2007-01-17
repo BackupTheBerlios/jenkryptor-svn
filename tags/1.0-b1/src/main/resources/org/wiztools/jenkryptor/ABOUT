@@ -1,0 +1,26 @@
+jEnkryptor 1.0 Beta 1
+=====================
+
+jEnkryptor is Java based cross-platform
+encryption software. It internally uses
+the WizCrypt encryption engine:
+
+http://wizcrypt.wiztools.org/
+
+The project page of jEncryptor is:
+
+http://wiztools.org/project/jEnkryptor/
+
+The project is covered under Apache 2.0
+license:
+
+http://www.apache.org/licenses/LICENSE-2.0.html
+
+The lock logo for jEnkryptor is taken
+from the OpenClipart project:
+
+http://www.openclipart.org/
+
+Thanks to the wonderful people at
+BerliOS.de for providing excellent OSS
+hosting platform.

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp codebase="http://wiztools.org/webstart/jEnkryptor/" 
+        href="jenkryptor.jnlp">
+    <information>
+		<title>jEnkryptor</title>
+	    <icon href="logo.png"/>
+    </information>
+    <resources>
+$dependencies
+    </resources>
+    <application-desc main-class="$mainClass"/>
+</jnlp>
