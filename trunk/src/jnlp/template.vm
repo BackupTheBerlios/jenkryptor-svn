@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="http://wiztools.org/webstart/jEnkryptor/" 
+<jnlp spec="1.0+" codebase="http://wiztools.org/webstart/jEnkryptor/" 
         href="jenkryptor.jnlp">
     <information>
-		<title>jEnkryptor</title>
-	    <icon href="logo.png"/>
+      <title>jEnkryptor</title>
+      <vendor>WizTools.org</vendor>
+      <icon href="logo.png"/>
+      <offline-allowed/>
     </information>
     <resources>
+      <j2se version="1.6+"/>
 $dependencies
     </resources>
     <application-desc main-class="$mainClass"/>
