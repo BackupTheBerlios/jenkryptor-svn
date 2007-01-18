@@ -125,16 +125,24 @@ public class Processor {
                     }
                     else{
                         String outPath = filePath.replaceFirst(".wiz$", "");
+                        File outFile = new File(outPath);
                         OutputStream os = new FileOutputStream(outPath);
-
-                        CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
-
-                        WizCrypt.decrypt(is, os, ck, cb, fileSize);
                         
-                        Globals.msgDisplayer.appendMessage("Done: " + outPath);
-                        
-                        if(Preferences.deleteSource_pref){
-                            file.delete();
+                        if(!outFile.exists() ||
+                                (outFile.exists() && Preferences.overwriteDestination_pref)){
+                            CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
+
+                            WizCrypt.decrypt(is, os, ck, cb, fileSize);
+
+                            Globals.msgDisplayer.appendMessage("Done: " + outPath);
+
+                            if(Preferences.deleteSource_pref){
+                                file.delete();
+                            }
+                        }
+                        else{
+                            Globals.msgDisplayer.appendMessage("SKIPPING: "
+                                    + outFile.getAbsolutePath() + " exists!");
                         }
                     }
                 }
