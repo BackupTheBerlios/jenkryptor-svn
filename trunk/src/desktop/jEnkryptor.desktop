@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec="/path/to/java -jar /path/to/jenkryptor-XX-jar-with-dependencies.jar"
+Terminal=0
+Type=Application
+Icon=/path/to/jenkryptor.png
+Categories=Application;Security;Java;
+Name=jEnkryptor
+Comment=Launches jEnkryptor
