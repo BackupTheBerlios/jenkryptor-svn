@@ -1,0 +1,23 @@
+<project name="" default="build-installer">
+	<property environment="env"/>
+	<property name="izpack.dir" value="${env.HOME}/apps/IzPack"/>
+	<property name="base.dir" value="."/>
+	<property name="dist.dir" value="target"/>
+	<property name="ver" value="1.0"/>
+
+	<target name="build-installer">
+		<echo>${izpack.dir}</echo>
+		<taskdef name="izpack" classpath="${izpack.dir}/lib/compiler.jar"
+			classname="com.izforge.izpack.ant.IzPackTask"/>
+
+		<copy file="src/izpack/install-readme.html" todir="${dist.dir}"/>
+		<copy file="LICENSE.txt" todir="${dist.dir}"/>
+
+		<izpack input="src/izpack/jenkryptor-install.xml"
+			basedir="${dist.dir}"
+			output="${dist.dir}/jenkryptor-install-${ver}.jar"
+			izPackDir="${izpack.dir}/"/>
+	</target>
+
+</project>
+
