@@ -79,9 +79,11 @@ public class Processor {
     class ProcessThread implements Runnable{
         
         private File file;
+        private String filePath;
         
         ProcessThread(File file){
             this.file = file;
+            this.filePath = file.getAbsolutePath();
         }
         
         public void run(){
@@ -99,8 +101,6 @@ public class Processor {
 
                 try{
                     InputStream is = new FileInputStream(file);
-
-                    String filePath = file.getAbsolutePath();
 
                     if(mode == MODE_ENCRYPT){
                         File outFile = new File(filePath + ".wiz");
@@ -147,12 +147,13 @@ public class Processor {
                     }
                 }
                 catch(PasswordMismatchException e){
-                    Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
+                    Globals.msgDisplayer.appendMessage("ERROR: " +
+                            e.getMessage() + filePath);
                 }
                 catch(IOException e){
-                    Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
+                    Globals.msgDisplayer.appendMessage("ERROR: " +
+                            e.getMessage() + filePath);
                 }
-
             }
             catch(NoSuchAlgorithmException e){
                 Globals.msgDisplayer.appendMessage("ERROR: "+e.getMessage());
