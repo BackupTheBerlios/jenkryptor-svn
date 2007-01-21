@@ -21,6 +21,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
 import static org.wiztools.jenkryptor.Globals.*;
 import org.wiztools.wizcrypt.Callback;
@@ -35,7 +36,8 @@ import org.wiztools.wizcrypt.WizCrypt;
  */
 public class Processor {
     
-    private static Processor processor = new Processor();
+    private static final Processor processor = new Processor();
+    private static final Logger LOG = Logger.getLogger(Processor.class.getName());
     
     /** Creates a new instance of Processor */
     private Processor() {
@@ -58,18 +60,22 @@ public class Processor {
 
                     Runnable r = new ProcessThread(file);
                     exec.execute(r);
-                    msgDisplayer.setStatus(TITLE);
                 }
+                LOG.finest("Awaiting shutdown of threadpool. . .");
                 exec.shutdown();
+                LOG.finest("Shutdown complete, awaiting termination. . .");
+                
                 // Just put an insane amount of time:
                 try{
                     exec.awaitTermination(999999999, TimeUnit.DAYS);
+                    LOG.finest("Termination successful!");
                 }
                 catch(InterruptedException ie){
                     ie.printStackTrace();
                 }
                 Globals.MAIN_FRAME.unfreeze();
                 Globals.isRunning = false;
+                msgDisplayer.setStatus(TITLE);
             }
         };
         
