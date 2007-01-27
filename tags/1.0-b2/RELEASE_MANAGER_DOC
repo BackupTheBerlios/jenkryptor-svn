@@ -1,0 +1,23 @@
+Release Manager Checklist
+=========================
+
+While making releases, make sure you have done
+the following:
+
+* pom.xml version change
+
+* src/main/resources/org/wiztools/jenkryptor/ABOUT
+  Change version here. Update the text if need be.
+
+* Change Log level to INFO in this file:
+  src/main/resources/org/wiztools/jenkryptor/logging.properties
+
+* Tag the release
+
+* Generate site, update in WizTools.org
+
+* BerliOS.de --> file release
+
+* FreshMeat.net --> announce
+
+

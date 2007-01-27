@@ -1,0 +1,28 @@
+ ---------
+ jEnkryptor
+ ---------
+ WizTools.org Team
+ ---------
+
+jEnkryptor
+
+ jEnkryptor is a Java swing based, multi-threaded cross-platform encryption
+ application. It uses the {{{http://wiztools.org/project/WizCrypt/}WizCrypt}}
+ engine.
+
+* Requirements
+
+ Java 6 or above is required.
+
+* License
+
+ jEnkryptor is covered by {{{license.html}Apache 2.0 License}}.
+
+* Run
+
+ The application is available as {{{http://java.sun.com/products/javawebstart/}Java Web Start}}.
+ {{{http://wiztools.org/webstart/jEnkryptor/jenkryptor.jnlp}Click here}} to run from browser.
+
+* Download
+
+ Download releases from {{{http://developer.berlios.de/project/showfiles.php?group_id=7940}BerliOS.de}}.

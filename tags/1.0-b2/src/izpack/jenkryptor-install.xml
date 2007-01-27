@@ -1,0 +1,47 @@
+<installation version="1.0">
+    <info>
+
+	<appname>jEnkryptor</appname>
+	<appversion>1.0</appversion>
+	<authors>
+	    <author name="Subhash" email="subwiz@gmail.com" />
+	</authors>
+	<url>http://wiztools.org/project/jEnkryptor/</url>
+	<javaversion>1.6</javaversion>
+
+    </info>
+
+    <guiprefs height="600" resizable="yes" width="800">
+	<laf name="metouia">
+	    <os family="unix" />
+	</laf>
+    </guiprefs>
+
+    <locale>
+	<langpack iso3="eng"/>
+    </locale>
+
+    <resources>
+	<res src="install-readme.html" id="HTMLInfoPanel.info"/>
+	<res src="LICENSE.txt" id="LicencePanel.licence"/>
+    </resources>
+
+    <panels>
+	<panel classname="HelloPanel"/>
+	<panel classname="HTMLInfoPanel"/>
+	<panel classname="LicencePanel"/>
+	<panel classname="PacksPanel"/>
+	<panel classname="TargetPanel"/>
+	<panel classname="InstallPanel"/>
+	<panel classname="SimpleFinishPanel"/>
+    </panels>
+
+    <packs>
+	<pack name="Core" required="yes">
+		<description>jEnkryptor</description>
+		<fileset dir="." targetdir="$INSTALL_PATH">
+			<include name="*.jar"/>
+		</fileset>
+	</pack>
+    </packs>
+</installation>
