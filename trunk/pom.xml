@@ -4,7 +4,7 @@
     <groupId>org.wiztools</groupId>
     <artifactId>jenkryptor</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-b1</version>
+    <version>1.0-b2</version>
     <name>jEnkryptor</name>
     <url>http://wiztools.org/project/jEnkryptor/</url>
     
@@ -34,7 +34,7 @@
         <developer>
             <id>subwiz</id>
             <name>Subhash Chandran</name>
-            <email>subwiz in the gmail.com server</email>
+            <email>subwiz at gmail dot com</email>
             <organization>SpikeSource</organization>
             <organizationUrl>http://www.spikesource.com/</organizationUrl>
             <roles>
