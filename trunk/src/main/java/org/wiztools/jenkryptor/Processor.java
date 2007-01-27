@@ -82,7 +82,9 @@ public class Processor {
         new Thread(process).start();
     }
     
-    class ProcessThread implements Runnable{
+    static class ProcessThread implements Runnable{
+        
+        private static final Logger LOG = Logger.getLogger(ProcessThread.class.getName());
         
         private File file;
         private String filePath;
@@ -130,19 +132,26 @@ public class Processor {
                         }
                     }
                     else{
+                        LOG.finest("Decrypting...");
                         String outPath = filePath.replaceFirst(".wiz$", "");
+                        LOG.finest("outPath: "+outPath);
                         File outFile = new File(outPath);
-                        OutputStream os = new FileOutputStream(outPath);
+                        
+                        LOG.finest("!outFile.exists()"+!outFile.exists());
                         
                         if(!outFile.exists() ||
                                 (outFile.exists() && Preferences.overwriteDestination_pref)){
                             CipherKey ck = CipherKeyGen.getCipherKeyForDecrypt(password);
+                            
+                            OutputStream os = new FileOutputStream(outFile);
 
+                            LOG.finest("Doing decrypt operation...");
                             WizCrypt.decrypt(is, os, ck, cb, fileSize);
 
                             Globals.msgDisplayer.appendMessage("Done: " + outPath);
 
                             if(Preferences.deleteSource_pref){
+                                LOG.finest("Deleting source...");
                                 file.delete();
                             }
                         }

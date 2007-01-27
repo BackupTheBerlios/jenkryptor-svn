@@ -11,6 +11,7 @@ package org.wiztools.jenkryptor.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.wiztools.jenkryptor.Globals;
 import org.wiztools.jenkryptor.validation.ValidatorException;
@@ -20,6 +21,8 @@ import org.wiztools.jenkryptor.validation.ValidatorException;
  * @author subhash
  */
 public class FileUtil {
+    
+    private static final Logger LOG = Logger.getLogger(FileUtil.class.getName());
     
     /** Creates a new instance of FileUtil */
     private FileUtil() {
